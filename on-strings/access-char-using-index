@@ -1,0 +1,7 @@
+const  firstName = "Dalasari Sirisha"
+
+for(let currentIndexValue =0; currentIndexValue < firstName.length; currentIndexValue++){
+  console.log(firstName[currentIndexValue])
+}
+
+
