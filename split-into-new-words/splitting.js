@@ -27,7 +27,7 @@ function splittingWord(word) {
 
   let final = "";
   let nextWord = word;
-  let extraWords;
+  let remainingLetters;
 
   while (nextWord.length > 1) {
     let updatedWord = nextWord;
@@ -35,9 +35,7 @@ function splittingWord(word) {
     let wordDiscovery = updatedWord[0];
     let isNextShouldBeVowel = !isVowel;
     nextWord = "";
-    extraWords = '';
-
-    findByAlternatingVowelsAndConsonants(updatedWord, isVowel, wordDiscovery,)
+    remainingLetters = '';
 
     for (let index = 0; index < updatedWord.length - 1; index++) {
       isVowel = checkIsVowel(updatedWord[index + 1]);
@@ -45,17 +43,17 @@ function splittingWord(word) {
         wordDiscovery = wordDiscovery + updatedWord[index + 1];
         isNextShouldBeVowel = !isNextShouldBeVowel;
       } else {
-        extraWords = extraWords + updatedWord[index + 1] + ",";
+        remainingLetters = remainingLetters + updatedWord[index + 1] + ",";
         nextWord = nextWord + updatedWord[index + 1];
       }
     }
-    final = (extraWords === "") ? final + wordDiscovery : final + wordDiscovery + ",";
+    final = (remainingLetters === "") ? final + wordDiscovery : final + wordDiscovery + ",";
 
   }
 
-  extraWords = removeCommaAtEnd(extraWords);
-  extraWords = (extraWords === ",") ? "" : extraWords;
-  return final + extraWords;
+  remainingLetters = removeCommaAtEnd(remainingLetters);
+  remainingLetters = (remainingLetters === ",") ? "" : remainingLetters;
+  return final + remainingLetters;
 }
 
 
