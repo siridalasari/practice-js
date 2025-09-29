@@ -68,7 +68,7 @@ function composeMessage(word, testResult, expectedWords) {
 
 function testDisplayNewWords(word, expectedWords) {
   console.log("-------------------------------------");
-  let result = splittingWord(word);
+  const result = splittingWord(word);
   console.log(composeMessage(word, result, expectedWords));
 }
 
