@@ -1,0 +1,145 @@
+const whitePawn = [
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨⚪🟨🟨🟨",
+	"🟨🟨⚪⚪⚪🟨🟨",
+	"🟨🟨🟨⚪🟨🟨🟨",
+	"🟨🟨⚪⚪⚪🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨"
+];
+const whiteRook = [
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨⚪🟨⚪🟨⚪🟨",
+	"🟨⚪⚪⚪⚪⚪🟨",
+	"🟨🟨⚪⚪⚪🟨🟨",
+	"🟨⚪⚪⚪⚪⚪🟨",
+	"🟨🟨⚪⚪⚪🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨"
+];
+const whiteKnight = [
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨⚪🟨🟨🟨",
+	"🟨⚪⚪⚪⚪🟨🟨",
+	"🟨🟨🟨⚪🟨🟨🟨",
+	"🟨🟨⚪⚪⚪⚪🟨",
+	"🟨⚪⚪⚪⚪⚪🟨",
+	"🟨🟨🟨🟨🟨🟨🟨"
+];
+const whiteKing = [
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨✝️🟨🟨🟨",
+	"🟨🟨⚪⚪⚪🟨🟨",
+	"🟨🟨🟨⚪🟨🟨🟨",
+	"🟨🟨🟨⚪🟨🟨🟨",
+	"🟨⚪⚪⚪⚪⚪🟨",
+	"🟨🟨🟨🟨🟨🟨🟨"
+];
+const whiteQueen = [
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨⚪🟨⚪🟨⚪🟨",
+	"🟨⚪⚪⚪⚪⚪🟨",
+	"🟨🟨⚪⚪⚪🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨"
+];
+const whiteBishop = [
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨⚪🟨🟨🟨",
+	"🟨🟨⚪⚪⚪🟨🟨",
+	"🟨🟨⚪⚪⚪🟨🟨",
+	"🟨🟨🟨⚪🟨🟨🟨",
+	"🟨🟨⚪⚪⚪🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨"
+];
+const emptyBlock = [
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨",
+	"🟨🟨🟨🟨🟨🟨🟨"
+];
+
+function replace(string, findValue, replaceValue) {
+	return string.replaceAll(findValue, replaceValue);
+}
+
+function replaceInArray(array, findValue, replaceValue) {
+	const newArray = [];
+
+	for (let index = 0; index < array.length; index++) {
+		newArray.push(replace(array[index], findValue, replaceValue));
+	}
+
+	return newArray;
+}
+
+const blackPawn = replaceInArray(whitePawn, "⚪", "🔘");
+const blackRook = replaceInArray(whiteRook, "⚪", "🔘");
+const blackKnight = replaceInArray(whiteKnight, "⚪", "🔘");
+const blackBishop = replaceInArray(whiteBishop, "⚪", "🔘");
+const blackKing = replaceInArray(whiteKing, "⚪", "🔘");
+const blackQueen = replaceInArray(whiteQueen, "⚪", "🔘");
+
+const board = [
+	[whiteRook, whiteKnight, whiteBishop, whiteKing, whiteQueen, whiteBishop, whiteKnight, whiteRook],
+	[whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn, whitePawn],
+	[emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock],
+	[emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock],
+	[emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock],
+	[emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock, emptyBlock],
+	[blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn, blackPawn],
+	[blackRook, blackKnight, blackBishop, blackKing, blackQueen, blackBishop, blackKnight, blackRook],
+];
+
+function greenBackGround(string) {
+	return `\x1B[48;5;41m ${string} \x1B[0m`;
+}
+
+function yellowBackGround(string) {
+	return `\x1B[48;5;214m ${string} \x1B[0m`;
+}
+
+function alternateColor(string, rowIndex, colunmIndex) {
+
+	if (
+		(rowIndex % 2 != 0 && colunmIndex % 2 === 0) ||
+		(rowIndex % 2 === 0 && colunmIndex % 2 != 0)
+	) {
+		return greenBackGround(replace(string, "🟨", "🟩"));
+	}
+
+	return yellowBackGround(string);
+}
+
+function mergeBlocks(array, index) {
+	const mergedArr = []
+
+	for (let rowIndex = 0; rowIndex < 7; rowIndex++) {
+		mergedArr.push(
+			alternateColor(array[0][rowIndex], index, 0) +
+			alternateColor(array[1][rowIndex], index, 1) +
+			alternateColor(array[2][rowIndex], index, 2) +
+			alternateColor(array[3][rowIndex], index, 3) +
+			alternateColor(array[4][rowIndex], index, 4) +
+			alternateColor(array[5][rowIndex], index, 5) +
+			alternateColor(array[6][rowIndex], index, 6) +
+			alternateColor(array[7][rowIndex], index, 7)
+		)
+	}
+
+	return mergedArr;
+}
+
+function displayBoard() {
+
+	for (let index = 0; index < 8; index++) {
+		const row = mergeBlocks(board[index], index);
+		console.log(row.join("\n"))
+	}
+
+}
+
+displayBoard();
