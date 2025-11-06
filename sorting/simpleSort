@@ -1,0 +1,124 @@
+let cost = 0;
+let timeTaken;
+
+function simpleSort(array) {
+  const data = array;
+
+  for (let i = 0; i < array.length; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      cost += 1;
+      if (data[i] < data[j]) {
+        const temp = data[i];
+        data[i] = data[j];
+        data[j] = temp;
+      }
+    }
+  }
+
+  return data;
+}
+
+function benchMark(length) {
+  console.log(
+    ("" + length).padEnd(5) + "|" + ("" + cost).padStart(5)
+  );
+}
+
+function add(elements) {
+  let sum = 0;
+
+  for (let index = 0; index < elements.length; index++) {
+    sum = sum + elements[index]
+  }
+
+  return sum;
+}
+
+function mean(elements) {
+  const sum = add(elements)
+  const count = elements.length
+  return sum / count;
+}
+
+function deviation(data, mean) {
+  const deviationValues = [];
+
+  for (let index = 0; index < data.length; index++) {
+    //console.log(data[index] - mean, ("" + (data[index] - mean)).slice(0,5))
+    deviationValues.push(("" + (data[index] - mean)).slice(0, 5) * 1);
+  }
+
+  return deviationValues;
+}
+
+function variance(data) {
+  const squares = [];
+
+  for (let index = 0; index < data.length; index++) {
+    squares.push((("" + data[index] ** 2).slice(0, 5)) * 1);
+  }
+
+  return [mean(squares), squares];
+}
+
+function standardDeviation(data) {
+  const average = mean(data);
+  const deviationData = deviation(data, average);
+  const variationValue = variance(deviationData);
+  const stdDeviation = (("" + Math.sqrt(variationValue[0])).slice(0, 4)) * 1;
+
+  return [stdDeviation, deviationData, variationValue[1]];
+}
+
+function median(dat) {
+  const data = simpleSort(dat);
+  const index = Math.floor(data.length / 2);
+  const medianVals = [(data[index] + data[index - 1]) / 2, data[index]]
+  return medianVals[data.length % 2];
+}
+
+function main(args) {
+  const data = generateData(5);
+  const medianVal = median(data);
+  const average = mean(data);
+  const standardDeviationVal = standardDeviation(data);
+  console.log(`
+    Data : ${data} \n
+    median : ${medianVal} \n
+    mean : ${average} \n
+    standard Deviation : ${standardDeviationVal[0]}
+    `);
+  // Differences from Mean 
+  // ${standardDeviationVal[1]} \n
+  // Squares : ${standardDeviationVal[2]} \n
+  //benchMark(meanVal, medianVal, standardDeviationVal);
+}
+
+main(Deno.args);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function random() {
+  return Math.floor(Math.random() * 10);
+}
+
+function generateData(length) {
+  const array = [];
+
+  for (let count = 0; count < length; count++) {
+    array.push(random());
+  }
+
+  return array;
+}
